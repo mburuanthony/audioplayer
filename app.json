@@ -22,11 +22,17 @@
           "audio"
         ]
       },
-      "supportsTablet": false
+      "supportsTablet": false,
+      "bundleIdentifier": "com.mburuantony.AudioPlayer"
     },
     "android": {
       "userInterfaceStyle": "automatic",
       "package": "com.mburuantony.AudioPlayer"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "2c983823-dccf-499b-98c4-5c737fe551ab"
+      }
     }
   }
 }
