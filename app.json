@@ -1,0 +1,32 @@
+{
+  "expo": {
+    "name": "AudioPlayer",
+    "slug": "AudioPlayer",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/img/icon.png",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#0F0E0E"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "infoPlist": {
+        "UIBackgroundModes": [
+          "audio"
+        ]
+      },
+      "supportsTablet": false
+    },
+    "android": {
+      "userInterfaceStyle": "automatic",
+      "package": "com.mburuantony.AudioPlayer"
+    }
+  }
+}
