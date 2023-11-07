@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "AudioPlayer",
-    "slug": "AudioPlayer",
+    "name": "audioplayer",
+    "slug": "audioplayer",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/img/icon.png",
@@ -22,16 +22,15 @@
           "audio"
         ]
       },
-      "supportsTablet": false,
-      "bundleIdentifier": "com.mburuantony.AudioPlayer"
+      "supportsTablet": false
     },
     "android": {
       "userInterfaceStyle": "automatic",
-      "package": "com.mburuantony.AudioPlayer"
+      "package": "com.mburuantony.audioplayer"
     },
     "extra": {
       "eas": {
-        "projectId": "2c983823-dccf-499b-98c4-5c737fe551ab"
+        "projectId": "c005c53c-a896-4967-8a30-e724b732457f"
       }
     }
   }
