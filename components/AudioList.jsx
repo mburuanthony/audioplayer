@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, View } from "react-native";
+import { FlatList, StyleSheet } from "react-native";
 import { useAudioContext } from "../context/AudioProvider";
 import { Audio } from "./Audio";
 
