@@ -1,23 +1,43 @@
 import { Pressable, StyleSheet, Text } from "react-native";
-import { EvilIcons } from "@expo/vector-icons";
+import { Entypo } from "@expo/vector-icons";
 import { useAudioContext } from "../context/AudioProvider";
 import { colors } from "../assets/style/colors";
 
 export const Audio = ({ audioTitle, audioURI }) => {
-  const { setSelecedAudio } = useAudioContext();
+  const { selectedAudio, updateSelectedAUdio } = useAudioContext();
 
   return (
     <Pressable
       style={styles.container}
-      onPress={() => setSelecedAudio({ title: audioTitle, URI: audioURI })}
+      onPress={() =>
+        updateSelectedAUdio({ filename: audioTitle, URI: audioURI })
+      }
     >
-      <Text style={styles.titleText}>
+      <Text
+        style={[
+          styles.titleText,
+          {
+            color:
+              selectedAudio.title === audioTitle
+                ? colors.textfaint
+                : colors.textdefault,
+          },
+        ]}
+      >
         {audioTitle.length > 32
-          ? `${String(audioTitle).substring(0, 32)}...`
+          ? `${String(audioTitle).substring(0, 49)}...`
           : audioTitle}
       </Text>
 
-      <EvilIcons name="play" size={30} color={colors.white} />
+      <Entypo
+        name="controller-play"
+        size={18}
+        color={
+          selectedAudio.title === audioTitle
+            ? colors.textfaint
+            : colors.textdefault
+        }
+      />
     </Pressable>
   );
 };
@@ -29,16 +49,15 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     width: "100%",
     height: 54,
-    padding: 8,
-    marginBottom: 8,
-    borderBottomWidth: 1,
-    borderBottomColor: "rgba(255, 255, 255, 0.095)",
-    borderRadius: 12,
+    marginBottom: 2,
+    paddingHorizontal: 8,
+    borderWidth: 0,
+    borderBottomWidth: 0.5,
+    borderBottomColor: colors.divider,
     backgroundColor: "transparent",
   },
   titleText: {
-    fontSize: 18,
-    fontFamily: "mukta-medium",
-    color: colors.white,
+    fontSize: 12,
+    fontFamily: "ops-light",
   },
 });
