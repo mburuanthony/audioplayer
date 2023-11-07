@@ -4,29 +4,30 @@
     "slug": "audioplayer",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/img/icon.png",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
     "splash": {
+      "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#0F0E0E"
+      "backgroundColor": "#1F1F1F"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "infoPlist": {
-        "UIBackgroundModes": [
-          "audio"
-        ]
+        "UIBackgroundModes": ["audio"]
       },
       "supportsTablet": false
     },
     "android": {
       "userInterfaceStyle": "automatic",
-      "package": "com.mburuantony.audioplayer"
+      "package": "com.mburuantony.audioplayer",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#1F1F1F"
+      }
     },
     "extra": {
       "eas": {
