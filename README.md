@@ -36,3 +36,7 @@ eas build --profile production --platform android
 # or
 npx eas build --profile production --platform android
 ```
+
+<br/>
+
+![Screenshot_2023-11-08-00-13-00-94](https://github.com/mburuanthony/audioplayer/assets/76121306/7527f789-40fb-447e-9426-be8660de9200)
