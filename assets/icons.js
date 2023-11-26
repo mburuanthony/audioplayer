@@ -1,24 +1,5 @@
 import { Svg, Path } from "react-native-svg";
 
-export const CloseIcon = () => {
-  return (
-    <Svg
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <Path
-        d="M14.75 9.25001L9.25 14.75M9.25 9.25001L14.75 14.75M6.5 2.47181C8.17147 1.5048 10.069 0.997038 12 1.00001C18.0753 1.00001 23 5.92471 23 12C23 18.0753 18.0753 23 12 23C5.9247 23 1 18.0753 1 12C1 9.99691 1.5357 8.11701 2.4718 6.50001"
-        stroke="#F8FAFC"
-        stroke-width="1.5"
-        stroke-linecap="round"
-      />
-    </Svg>
-  );
-};
-
 export const FastForwardIcon = () => {
   return (
     <Svg
