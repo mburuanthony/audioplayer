@@ -22,8 +22,8 @@ export const CloseIcon = () => {
 export const FastForwardIcon = () => {
   return (
     <Svg
-      width="26"
-      height="26"
+      width="22"
+      height="22"
       viewBox="0 0 26 26"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -47,8 +47,8 @@ export const FastForwardIcon = () => {
 export const NextIcon = () => {
   return (
     <Svg
-      width="22"
-      height="22"
+      width="18"
+      height="18"
       viewBox="0 0 22 22"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -87,11 +87,11 @@ export const PauseIcon = () => {
   );
 };
 
-export const PlayIcon = ({ fillcolor }) => {
+export const PlayIcon = ({ fillcolor, size }) => {
   return (
     <Svg
-      width="22"
-      height="22"
+      width={size ?? 22}
+      height={size ?? 22}
       viewBox="0 0 22 22"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -114,8 +114,8 @@ export const PlayIcon = ({ fillcolor }) => {
 export const PreviousIcon = () => {
   return (
     <Svg
-      width="22"
-      height="22"
+      width="18"
+      height="18"
       viewBox="0 0 22 22"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -139,8 +139,8 @@ export const PreviousIcon = () => {
 export const RewindIcon = () => {
   return (
     <Svg
-      width="26"
-      height="26"
+      width="22"
+      height="22"
       viewBox="0 0 26 26"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -164,8 +164,8 @@ export const RewindIcon = () => {
 export const SearchIcon = ({ fillcolor }) => {
   return (
     <Svg
-      width="22"
-      height="22"
+      width="18"
+      height="18"
       viewBox="0 0 22 22"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
