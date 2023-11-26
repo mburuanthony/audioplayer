@@ -1,6 +1,7 @@
 import { Pressable, StyleSheet, Text } from "react-native";
-import { Entypo } from "@expo/vector-icons";
 import { useAudioContext } from "../context/AudioProvider";
+import { PlayIcon } from "../assets/icons";
+import { text } from "../assets/style/styles";
 import { colors } from "../assets/style/colors";
 
 export const Audio = ({ audioTitle, audioURI }) => {
@@ -15,27 +16,25 @@ export const Audio = ({ audioTitle, audioURI }) => {
     >
       <Text
         style={[
-          styles.titleText,
+          text,
           {
             color:
               selectedAudio.title === audioTitle
-                ? colors.textfaint
-                : colors.textdefault,
+                ? colors.textdefault
+                : colors.textfaint,
           },
         ]}
       >
         {audioTitle.length > 32
-          ? `${String(audioTitle).substring(0, 49)}...`
+          ? `${String(audioTitle).substring(0, 48)}...`
           : audioTitle}
       </Text>
 
-      <Entypo
-        name="controller-play"
-        size={18}
-        color={
+      <PlayIcon
+        fillcolor={
           selectedAudio.title === audioTitle
-            ? colors.textfaint
-            : colors.textdefault
+            ? colors.dividerfaint
+            : colors.textfaint
         }
       />
     </Pressable>
@@ -53,11 +52,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     borderWidth: 0,
     borderBottomWidth: 0.5,
-    borderBottomColor: colors.divider,
+    borderBottomColor: colors.dividerfaint,
     backgroundColor: "transparent",
-  },
-  titleText: {
-    fontSize: 12,
-    fontFamily: "ops-light",
   },
 });
