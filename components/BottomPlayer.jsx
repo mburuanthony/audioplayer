@@ -1,13 +1,23 @@
 import { useEffect, useState } from "react";
-import { Pressable, StyleSheet, View, Dimensions } from "react-native";
 import {
-  Ionicons,
-  SimpleLineIcons,
-  MaterialCommunityIcons,
-} from "@expo/vector-icons";
-import { useAudioContext } from "../context/AudioProvider";
+  Dimensions,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  Text,
+} from "react-native";
 import { Audio } from "expo-av";
+import { useAudioContext } from "../context/AudioProvider";
+import {
+  PlayIcon,
+  PauseIcon,
+  NextIcon,
+  PreviousIcon,
+  FastForwardIcon,
+  RewindIcon,
+} from "../assets/icons";
 import { colors } from "../assets/style/colors";
+import { text } from "../assets/style/styles";
 
 const { width: SCREEN_WIDTH } = Dimensions.get("window");
 
@@ -17,6 +27,8 @@ export const BottomPlayer = () => {
   const [currpos, setcurrpos] = useState(0);
   const [progress, setprogress] = useState(0);
   const [isplaying, setisplaying] = useState(false);
+  const [currplaytime, setcurrplaytime] = useState("");
+  const [totalplaytime, settotalplaytime] = useState("");
 
   const playNext = () => {
     const currsongidx = audioFiles.findIndex(
@@ -72,7 +84,30 @@ export const BottomPlayer = () => {
       const progress =
         (playbackStatus?.positionMillis / playbackStatus?.durationMillis) * 100;
 
+      const currentTime = Math.floor(playbackStatus?.positionMillis);
+      const totalTime = Math.floor(playbackStatus?.durationMillis);
+
+      const currTimeminutes = Math.floor(currentTime / 1000 / 60);
+      const currTimeseconds = Math.floor((currentTime / 1000) % 60);
+      const currTimeminutesFormatted =
+        currTimeminutes > 9 ? currTimeminutes : `0${currTimeminutes}`;
+      const currTimesecondsFormatted =
+        currTimeseconds > 9 ? currTimeseconds : `0${currTimeseconds}`;
+
+      const totalTimeminutes = Math.floor(totalTime / 60 / 1000);
+      const totalTimeseconds = Math.floor((totalTime / 1000) % 60);
+      const totalTimeminutesFormatted =
+        totalTimeminutes > 9 ? totalTimeminutes : `0${totalTimeminutes}`;
+      const totalTimesecondsFormatted =
+        totalTimeseconds > 9 ? totalTimeseconds : `0${totalTimeseconds}`;
+
       setprogress(progress);
+      setcurrplaytime(
+        `${currTimeminutesFormatted}:${currTimesecondsFormatted}`
+      );
+      settotalplaytime(
+        `${totalTimeminutesFormatted}:${totalTimesecondsFormatted}`
+      );
     } else {
       setisplaying(false);
     }
@@ -117,67 +152,57 @@ export const BottomPlayer = () => {
 
   return (
     <View style={styles.container}>
+      <View style={{ marginBottom: 6 }}>
+        <View style={styles.row}>
+          <Text style={text}>
+            {selectedAudio.URI.length > 26
+              ? `${String(selectedAudio.title).substring(0, 24)}...`
+              : selectedAudio.title}
+          </Text>
+
+          <Text style={text}>
+            {currplaytime} / {totalplaytime}
+          </Text>
+        </View>
+
+        <View
+          style={[
+            styles.progressbar,
+            {
+              width: `${progress}%`,
+            },
+          ]}
+        />
+      </View>
+
       <View style={styles.actions}>
-        <Pressable onPress={playPrevious}>
-          <Ionicons
-            name="play-skip-back-outline"
-            size={20}
-            color={colors.textdefault}
-          />
-        </Pressable>
+        <TouchableOpacity onPress={playPrevious}>
+          <PreviousIcon />
+        </TouchableOpacity>
 
-        <Pressable style={styles.rewndfrwdicns} onPress={rewind30}>
-          <MaterialCommunityIcons
-            name="rewind-30"
-            size={18}
-            color={colors.textdefault}
-          />
-        </Pressable>
+        <TouchableOpacity style={styles.rewndfrwdicns} onPress={rewind30}>
+          <RewindIcon />
+        </TouchableOpacity>
 
-        <Pressable
+        <TouchableOpacity
           style={styles.playPause}
           onPress={isplaying ? pauseaudio : playaudio}
         >
           {isplaying ? (
-            <SimpleLineIcons
-              name="control-pause"
-              size={18}
-              color={colors.textdefault}
-            />
+            <PauseIcon />
           ) : (
-            <SimpleLineIcons
-              name="control-play"
-              size={18}
-              color={colors.textdefault}
-            />
+            <PlayIcon fillcolor={colors.textdefault} size={26} />
           )}
-        </Pressable>
+        </TouchableOpacity>
 
-        <Pressable style={styles.rewndfrwdicns} onPress={forward30}>
-          <MaterialCommunityIcons
-            name="fast-forward-30"
-            size={18}
-            color={colors.textdefault}
-          />
-        </Pressable>
+        <TouchableOpacity style={styles.rewndfrwdicns} onPress={forward30}>
+          <FastForwardIcon />
+        </TouchableOpacity>
 
-        <Pressable onPress={playNext}>
-          <Ionicons
-            name="play-skip-forward-outline"
-            size={20}
-            color={colors.textdefault}
-          />
-        </Pressable>
+        <TouchableOpacity onPress={playNext}>
+          <NextIcon />
+        </TouchableOpacity>
       </View>
-
-      <View
-        style={[
-          styles.progressbar,
-          {
-            width: `${progress}%`,
-          },
-        ]}
-      />
     </View>
   );
 };
@@ -185,32 +210,35 @@ export const BottomPlayer = () => {
 const styles = StyleSheet.create({
   container: {
     width: SCREEN_WIDTH,
-    height: 64,
+    height: 80,
     position: "absolute",
     bottom: 0,
-    justifyContent: "center",
-    paddingHorizontal: 8,
+    padding: 8,
     borderWidth: 0,
-    borderTopWidth: 0.5,
-    borderColor: colors.divider,
-    backgroundColor: colors.alertbg,
+    backgroundColor: colors.secondary,
+  },
+  row: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 8,
+  },
+  progressbar: {
+    height: 3,
+    borderRadius: 4,
+    backgroundColor: colors.dividerfaint,
   },
   actions: {
-    width: "100%",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
+    gap: 32,
   },
   playPause: {
-    marginHorizontal: 18,
-  },
-  rewndfrwdicns: {
-    marginHorizontal: 24,
-  },
-  progressbar: {
-    height: 2,
-    marginTop: 12,
+    width: 32,
+    height: 32,
     borderRadius: 8,
-    backgroundColor: colors.divider,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
