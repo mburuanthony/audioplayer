@@ -1,16 +1,24 @@
 import "expo-dev-client";
-import { useEffect, useCallback, useState } from "react";
-import { Pressable, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { useEffect, useCallback } from "react";
+import {
+  SafeAreaView,
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+  View,
+} from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Audio, InterruptionModeIOS, InterruptionModeAndroid } from "expo-av";
-import { SearchBar } from "./components/SearchBar";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { AudioList } from "./components/AudioList";
 import { BottomPlayer } from "./components/BottomPlayer";
+import { SearchUi } from "./components/SearchUi";
 import { AudioProvider, useAudioContext } from "./context/AudioProvider";
-import { Feather } from "@expo/vector-icons";
+import { SearchUiProvider, usesearchui } from "./context/searchctx";
+import { SearchIcon } from "./assets/icons";
 import { colors } from "./assets/style/colors";
 
 function App() {
@@ -19,7 +27,7 @@ function App() {
     "ops-light": require("./assets/font/OpenSans-Light.ttf"),
   });
   const { selectedAudio } = useAudioContext();
-  const [showSearch, setShowSearch] = useState(false);
+  const { searchUisVisible, showsearchUi } = usesearchui();
 
   useEffect(() => {
     async function prepare() {
@@ -48,30 +56,30 @@ function App() {
     return null;
   }
 
-  const hideSearchBar = () => setShowSearch(false);
-
   return (
     <SafeAreaProvider>
       <SafeAreaView onLayout={onLayoutRootView} style={[styles.container]}>
         <StatusBar translucent style="light" />
-        {showSearch && (
-          <SearchBar
-            showSearch={showSearch}
-            hideSearchBarFunc={hideSearchBar}
-          />
-        )}
 
-        <View style={[styles.topView, { opacity: showSearch ? 0 : 1 }]}>
+        <View style={styles.topView}>
           <Text style={[styles.text]}>AudioPlayer</Text>
-          <Pressable
-            style={{ position: "absolute", right: 8 }}
-            onPress={() => setShowSearch(true)}
+          <TouchableOpacity
+            style={{
+              width: 24,
+              height: 24,
+              position: "absolute",
+              alignItems: "center",
+              justifyContent: "center",
+              right: 8,
+            }}
+            onPress={() => showsearchUi()}
           >
-            <Feather name="search" size={20} color={colors.textfaint} />
-          </Pressable>
+            <SearchIcon />
+          </TouchableOpacity>
         </View>
         <AudioList />
         {selectedAudio.URI !== "" && <BottomPlayer />}
+        {searchUisVisible && <SearchUi />}
       </SafeAreaView>
     </SafeAreaProvider>
   );
@@ -79,9 +87,13 @@ function App() {
 
 export default function AppProvider() {
   return (
-    <AudioProvider>
-      <App />
-    </AudioProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <AudioProvider>
+        <SearchUiProvider>
+          <App />
+        </SearchUiProvider>
+      </AudioProvider>
+    </GestureHandlerRootView>
   );
 }
 
@@ -103,6 +115,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: "ops-regular",
     textAlign: "center",
-    color: colors.textdefault,
+    color: colors.textfaint,
   },
 });
