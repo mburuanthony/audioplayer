@@ -29,6 +29,22 @@ expo start
 npx expo start
 ```
 
+##### compile development build
+
+```console
+eas build --profile development --platform android
+# or
+npx eas build --profile development --platform android
+```
+
+##### preview in development build
+
+```console
+expo start --dev-client
+# or
+npx expo start --dev-client
+```
+
 ##### build android apk
 
 ```console
@@ -36,5 +52,3 @@ eas build --profile production --platform android
 # or
 npx eas build --profile production --platform android
 ```
-
-<img src="https://github.com/mburuanthony/audioplayer/assets/76121306/7527f789-40fb-447e-9426-be8660de9200" width="40%" />
