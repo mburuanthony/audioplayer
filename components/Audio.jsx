@@ -25,7 +25,7 @@ export const Audio = ({ audioTitle, audioURI }) => {
           },
         ]}
       >
-        {audioTitle.length > 32
+        {audioTitle.length > 48
           ? `${String(audioTitle).substring(0, 48)}...`
           : audioTitle}
       </Text>
@@ -33,7 +33,7 @@ export const Audio = ({ audioTitle, audioURI }) => {
       <PlayIcon
         fillcolor={
           selectedAudio.title === audioTitle
-            ? colors.dividerfaint
+            ? colors.textdefault
             : colors.textfaint
         }
       />
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     width: "100%",
     height: 54,
-    marginBottom: 2,
+    marginBottom: 6,
     paddingHorizontal: 8,
     borderWidth: 0,
     borderBottomWidth: 0.5,
