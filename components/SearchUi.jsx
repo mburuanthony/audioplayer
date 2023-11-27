@@ -117,7 +117,7 @@ export const SearchUi = () => {
           ]}
         >
           <TextInput
-            placeholder="Search my audio..."
+            placeholder="Search my music..."
             placeholderTextColor={colors.textfaint}
             style={styles.input}
             value={searchvalue}
