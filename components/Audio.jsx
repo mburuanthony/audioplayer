@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text } from "react-native";
+import { TouchableOpacity, StyleSheet, Text } from "react-native";
 import { useAudioContext } from "../context/AudioProvider";
 import { PlayIcon } from "../assets/icons";
 import { text } from "../assets/style/styles";
@@ -8,7 +8,7 @@ export const Audio = ({ audioTitle, audioURI }) => {
   const { selectedAudio, updateSelectedAUdio } = useAudioContext();
 
   return (
-    <Pressable
+    <TouchableOpacity
       style={styles.container}
       onPress={() =>
         updateSelectedAUdio({ filename: audioTitle, URI: audioURI })
@@ -37,7 +37,7 @@ export const Audio = ({ audioTitle, audioURI }) => {
             : colors.textfaint
         }
       />
-    </Pressable>
+    </TouchableOpacity>
   );
 };
 
