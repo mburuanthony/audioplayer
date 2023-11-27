@@ -88,14 +88,28 @@ export const BottomPlayer = () => {
       const totalTime = Math.floor(playbackStatus?.durationMillis);
 
       const currTimeminutes = Math.floor(currentTime / 1000 / 60);
+      const currentTimehours = Math.floor(currTimeminutes / 60);
       const currTimeseconds = Math.floor((currentTime / 1000) % 60);
+      const currTimehoursFormatted =
+        currentTimehours == 0
+          ? ``
+          : currentTimehours > 9
+          ? `${currentTimehours}:`
+          : `0${currentTimehours}:`;
       const currTimeminutesFormatted =
         currTimeminutes > 9 ? currTimeminutes : `0${currTimeminutes}`;
       const currTimesecondsFormatted =
         currTimeseconds > 9 ? currTimeseconds : `0${currTimeseconds}`;
 
       const totalTimeminutes = Math.floor(totalTime / 60 / 1000);
+      const totalTimehours = Math.floor(totalTimeminutes / 60);
       const totalTimeseconds = Math.floor((totalTime / 1000) % 60);
+      const totalTimehoursformatted =
+        totalTimehours == 0
+          ? ``
+          : totalTimehours > 9
+          ? `${totalTimehours}:`
+          : `0${totalTimehours}:`;
       const totalTimeminutesFormatted =
         totalTimeminutes > 9 ? totalTimeminutes : `0${totalTimeminutes}`;
       const totalTimesecondsFormatted =
@@ -103,10 +117,10 @@ export const BottomPlayer = () => {
 
       setprogress(progress);
       setcurrplaytime(
-        `${currTimeminutesFormatted}:${currTimesecondsFormatted}`
+        `${currTimehoursFormatted}${currTimeminutesFormatted}:${currTimesecondsFormatted}`
       );
       settotalplaytime(
-        `${totalTimeminutesFormatted}:${totalTimesecondsFormatted}`
+        `${totalTimehoursformatted}${totalTimeminutesFormatted}:${totalTimesecondsFormatted}`
       );
     } else {
       setisplaying(false);
