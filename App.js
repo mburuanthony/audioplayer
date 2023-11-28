@@ -19,6 +19,7 @@ import { SearchUi } from "./components/SearchUi";
 import { AudioProvider, useAudioContext } from "./context/AudioProvider";
 import { SearchUiProvider, usesearchui } from "./context/searchctx";
 import { SearchIcon, RefreshIcon } from "./assets/icons";
+import { divider } from "./assets/style/styles";
 import { colors } from "./assets/style/colors";
 
 function App() {
@@ -75,7 +76,7 @@ function App() {
                 }
               />
             </TouchableOpacity>
-            <View style={styles.divider} />
+            <View style={divider} />
             <TouchableOpacity
               style={styles.touchable}
               onPress={() => getAudioFiles()}
@@ -145,10 +146,5 @@ const styles = StyleSheet.create({
   touchable: {
     flexDirection: "row",
     alignItems: "center",
-  },
-  divider: {
-    width: 0.5,
-    height: "100%",
-    backgroundColor: colors.dividerfaint,
   },
 });
