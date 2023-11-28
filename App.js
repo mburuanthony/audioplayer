@@ -18,7 +18,7 @@ import { BottomPlayer } from "./components/BottomPlayer";
 import { SearchUi } from "./components/SearchUi";
 import { AudioProvider, useAudioContext } from "./context/AudioProvider";
 import { SearchUiProvider, usesearchui } from "./context/searchctx";
-import { SearchIcon } from "./assets/icons";
+import { SearchIcon, RefreshIcon } from "./assets/icons";
 import { colors } from "./assets/style/colors";
 
 function App() {
@@ -26,7 +26,7 @@ function App() {
     "ops-regular": require("./assets/font/OpenSans-Regular.ttf"),
     "ops-light": require("./assets/font/OpenSans-Light.ttf"),
   });
-  const { selectedAudio } = useAudioContext();
+  const { getAudioFiles, refreshing, selectedAudio } = useAudioContext();
   const { searchUisVisible, showsearchUi } = usesearchui();
 
   useEffect(() => {
@@ -62,22 +62,34 @@ function App() {
         <StatusBar translucent style="light" />
 
         <View style={styles.topView}>
-          <Text style={[styles.text]}>AudioPlayer</Text>
-          <TouchableOpacity
-            style={{
-              width: 24,
-              height: 24,
-              position: "absolute",
-              alignItems: "center",
-              justifyContent: "center",
-              right: 8,
-            }}
-            onPress={() => showsearchUi()}
-          >
-            <SearchIcon />
-          </TouchableOpacity>
+          <Text style={[styles.text]}>Audio Player</Text>
+
+          <View style={styles.searchrefresh}>
+            <TouchableOpacity
+              style={styles.touchable}
+              onPress={() => showsearchUi()}
+            >
+              <SearchIcon
+                fillcolor={
+                  searchUisVisible ? colors.textdefault : colors.textfaint
+                }
+              />
+            </TouchableOpacity>
+            <View style={styles.divider} />
+            <TouchableOpacity
+              style={styles.touchable}
+              onPress={() => getAudioFiles()}
+              disabled={searchUisVisible}
+            >
+              <RefreshIcon
+                fillcolor={refreshing ? colors.textdefault : colors.textfaint}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
+
         <AudioList />
+
         {selectedAudio.URI !== "" && <BottomPlayer />}
         {searchUisVisible && <SearchUi />}
       </SafeAreaView>
@@ -116,5 +128,27 @@ const styles = StyleSheet.create({
     fontFamily: "ops-regular",
     textAlign: "center",
     color: colors.textfaint,
+  },
+  searchrefresh: {
+    position: "absolute",
+    right: 8,
+    padding: 4,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 0.5,
+    gap: 12,
+    borderColor: colors.dividerfaint,
+    borderRadius: 32,
+    backgroundColor: colors.accent,
+  },
+  touchable: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  divider: {
+    width: 0.5,
+    height: "100%",
+    backgroundColor: colors.dividerfaint,
   },
 });
