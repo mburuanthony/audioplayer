@@ -17,7 +17,7 @@ export const AudioList = () => {
           audioURI={data.item.uri}
         />
       )}
-      style={[styles.container, { marginBottom: selectedAudio.URI ? 100 : 0 }]}
+      style={[styles.container, { marginBottom: selectedAudio.URI ? 78 : 0 }]}
     />
   );
 };
