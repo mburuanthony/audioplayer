@@ -127,19 +127,21 @@ export const SearchUi = () => {
           <SearchIcon />
         </View>
 
-        <FlatList
-          showsVerticalScrollIndicator={false}
-          alwaysBounceVertical
-          data={audiofromsearch}
-          renderItem={(data) => (
-            <Audio
-              key={data.item?.id + data.item?.filename}
-              audioTitle={data.item?.filename}
-              audioURI={data.item?.uri}
-            />
-          )}
-          style={{ width: "100%" }}
-        />
+        {searchvalue !== "" && (
+          <FlatList
+            showsVerticalScrollIndicator={false}
+            alwaysBounceVertical
+            data={audiofromsearch}
+            renderItem={(data) => (
+              <Audio
+                key={data.item?.id + data.item?.filename}
+                audioTitle={data.item?.filename}
+                audioURI={data.item?.uri}
+              />
+            )}
+            style={{ width: "100%" }}
+          />
+        )}
       </Animated.View>
     </GestureDetector>
   );
