@@ -17,7 +17,7 @@ import {
   RewindIcon,
 } from "../assets/icons";
 import { colors } from "../assets/style/colors";
-import { text } from "../assets/style/styles";
+import { divider, text } from "../assets/style/styles";
 
 const { width: SCREEN_WIDTH } = Dimensions.get("window");
 
@@ -166,38 +166,7 @@ export const BottomPlayer = () => {
 
   return (
     <View style={styles.container}>
-      <View style={{ marginBottom: 6 }}>
-        <View style={styles.row}>
-          <Text style={text}>
-            {selectedAudio.URI.length > 26
-              ? `${String(selectedAudio.title).substring(0, 24)}...`
-              : selectedAudio.title}
-          </Text>
-
-          <Text style={text}>
-            {currplaytime} / {totalplaytime}
-          </Text>
-        </View>
-
-        <View
-          style={[
-            styles.progressbar,
-            {
-              width: `${progress}%`,
-            },
-          ]}
-        />
-      </View>
-
-      <View style={styles.actions}>
-        <TouchableOpacity onPress={playPrevious}>
-          <PreviousIcon />
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.rewndfrwdicns} onPress={rewind30}>
-          <RewindIcon />
-        </TouchableOpacity>
-
+      <View style={styles.playpausectr}>
         <TouchableOpacity
           style={styles.playPause}
           onPress={isplaying ? pauseaudio : playaudio}
@@ -205,17 +174,53 @@ export const BottomPlayer = () => {
           {isplaying ? (
             <PauseIcon />
           ) : (
-            <PlayIcon fillcolor={colors.textdefault} size={26} />
+            <PlayIcon fillcolor={colors.textdefault} size={30} />
           )}
         </TouchableOpacity>
+        <View style={[divider, { height: "60%" }]} />
+      </View>
 
-        <TouchableOpacity style={styles.rewndfrwdicns} onPress={forward30}>
-          <FastForwardIcon />
-        </TouchableOpacity>
+      <View style={{ width: "76%" }}>
+        <View style={{ marginBottom: 10 }}>
+          <View
+            style={[
+              styles.progressbar,
+              {
+                width: `${progress}%`,
+              },
+            ]}
+          />
 
-        <TouchableOpacity onPress={playNext}>
-          <NextIcon />
-        </TouchableOpacity>
+          <View style={styles.row}>
+            <Text style={text}>
+              {selectedAudio.URI.length > 28
+                ? `${String(selectedAudio.title).substring(0, 28)}...`
+                : selectedAudio.title}
+            </Text>
+
+            <Text style={text}>
+              {currplaytime} / {totalplaytime}
+            </Text>
+          </View>
+        </View>
+
+        <View style={styles.actions}>
+          <TouchableOpacity onPress={playPrevious}>
+            <PreviousIcon />
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.rewndfrwdicns} onPress={rewind30}>
+            <RewindIcon />
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.rewndfrwdicns} onPress={forward30}>
+            <FastForwardIcon />
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={playNext}>
+            <NextIcon />
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -224,21 +229,28 @@ export const BottomPlayer = () => {
 const styles = StyleSheet.create({
   container: {
     width: SCREEN_WIDTH,
-    height: 80,
+    height: 78,
     position: "absolute",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    gap: 12,
     bottom: 0,
-    padding: 8,
+    paddingHorizontal: 10,
+    paddingVertical: 6,
     borderWidth: 0,
-    backgroundColor: colors.secondary,
+    borderTopWidth: 0.5,
+    borderTopColor: colors.dividerfaint,
+    backgroundColor: colors.accent,
   },
   row: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    marginBottom: 8,
   },
   progressbar: {
     height: 3,
+    marginBottom: 4,
     borderRadius: 4,
     backgroundColor: colors.dividerfaint,
   },
@@ -246,13 +258,23 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    gap: 32,
+    gap: 34,
+  },
+  playpausectr: {
+    width: "21%",
+    height: "100%",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   playPause: {
-    width: 32,
-    height: 32,
-    borderRadius: 8,
+    width: 60,
+    height: 60,
+    borderRadius: 500,
     alignItems: "center",
     justifyContent: "center",
+    borderWidth: 0.5,
+    borderColor: colors.dividerfaint,
+    backgroundColor: colors.accent,
   },
 });
