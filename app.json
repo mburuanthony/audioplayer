@@ -14,14 +14,10 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "infoPlist": {
-        "UIBackgroundModes": [
-          "audio"
-        ]
+        "UIBackgroundModes": ["audio"]
       },
       "supportsTablet": false
     },
@@ -38,8 +34,6 @@
         "projectId": "c005c53c-a896-4967-8a30-e724b732457f"
       }
     },
-    "plugins": [
-      "react-native-android-widget"
-    ]
+    "plugins": []
   }
 }
