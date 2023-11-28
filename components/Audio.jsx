@@ -1,12 +1,10 @@
 import { TouchableOpacity, StyleSheet, Text } from "react-native";
 import { useAudioContext } from "../context/AudioProvider";
-import { usesearchui } from "../context/searchctx";
 import { PlayIcon } from "../assets/icons";
 import { text } from "../assets/style/styles";
 import { colors } from "../assets/style/colors";
 
 export const Audio = ({ audioTitle, audioURI }) => {
-  const { searchUisVisible } = usesearchui();
   const { selectedAudio, updateSelectedAUdio } = useAudioContext();
 
   return (
@@ -15,7 +13,6 @@ export const Audio = ({ audioTitle, audioURI }) => {
       onPress={() =>
         updateSelectedAUdio({ filename: audioTitle, URI: audioURI })
       }
-      disabled={searchUisVisible}
     >
       <Text
         style={[
