@@ -9,6 +9,7 @@ const audioContext = createContext({
     title: "",
     URI: "",
   },
+  refreshing: false,
   setSelectedAudio: () => {},
   getAudioFiles: () => {},
   updateSelectedAUdio: ({ filename, URI }) => {},
@@ -17,8 +18,11 @@ const audioContext = createContext({
 export const AudioProvider = ({ children }) => {
   const [audioFiles, setAudioFiles] = useState([]);
   const [selectedAudio, setSelectedAudio] = useState({ title: "", URI: "" });
+  const [refreshing, setRefreshing] = useState(false);
 
   const getAudioFiles = async () => {
+    setRefreshing(true);
+
     let media = await MediaLibrary.getAssetsAsync({
       mediaType: "audio",
     });
@@ -27,7 +31,9 @@ export const AudioProvider = ({ children }) => {
       first: media.totalCount,
       sortBy: "creationTime",
     });
+
     setAudioFiles(media.assets);
+    setRefreshing(false);
   };
 
   const getPermission = async () => {
@@ -75,6 +81,7 @@ export const AudioProvider = ({ children }) => {
         audioFiles,
         setAudioFiles,
         selectedAudio,
+        refreshing,
         getAudioFiles: getAudioFiles,
         updateSelectedAUdio,
       }}
