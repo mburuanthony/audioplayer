@@ -11,3 +11,9 @@ export const title = {
   fontFamily: "ops-regular",
   color: colors.textfaint,
 };
+
+export const divider = {
+  width: 0.5,
+  height: "100%",
+  backgroundColor: colors.dividerfaint,
+};
